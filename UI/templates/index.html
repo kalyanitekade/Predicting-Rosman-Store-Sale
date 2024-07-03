@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Store Sales Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url(https://img.freepik.com/free-psd/fashion-shopping-background_23-2150752492.jpg); /* Local image file */
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            width: 400px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .prediction {
+            font-size: 24px;
+            color: green;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Rossman store sales prediction</h1>
+        <form action="/" method="post">
+            <label for="CompetitionDistance">Competition Distance:</label>
+            <input type="text" id="CompetitionDistance" name="CompetitionDistance" value="{{ request.form['CompetitionDistance'] }}" placeholder="Enter competition distance"><br>
+            
+            <label for="Store">Store:</label>
+            <input type="text" id="Store" name="Store" value="{{ request.form['Store'] }}" placeholder="Enter store ID"><br>
+            
+            <label for="Promo">Discount (enter 1 or 0):</label>
+            <input type="text" id="Promo" name="Promo" value="{{ request.form['Promo'] }}" placeholder="Enter 1 for yes, 0 for no"><br>
+            
+            <label for="CompetitionOpenSinceYear">Competition Open (Year):</label>
+            <input type="text" id="CompetitionOpenSinceYear" name="CompetitionOpenSinceYear" value="{{ request.form['CompetitionOpenSinceYear'] }}" placeholder="Enter year competition opened"><br>
+            
+            <label for="DayOfWeek">Day (1=Mon, ..., 7=Sun):</label>
+            <input type="text" id="DayOfWeek" name="DayOfWeek" value="{{ request.form['DayOfWeek'] }}" placeholder="Enter day of week number"><br>
+            
+            <input type="submit" value="Predict">
+        </form>
+
+        {% if prediction is not none %}
+            <div class="prediction">
+                <h2>Predicted Sales: {{ prediction }}</h2>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
+
